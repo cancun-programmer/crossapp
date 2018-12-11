@@ -1,0 +1,22 @@
+{
+  "name": "crossapp",
+  "version": "1.0.0",
+  "description": "Aplicación para control de membresías de gymnasio de CrossFit",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amadojms/systemSporting/invitations"
+  },
+  "author": "Miguel Angel Martin y Amado Jesus Martin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.3.16"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.8"
+  }
+}
