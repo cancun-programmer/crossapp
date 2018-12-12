@@ -5,7 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 //const path = require('path');
 const config = require('./config/db');
-//var api = require('./routes/routes');
+var api = require('./routes/routes');
 
 const app = express();
 
@@ -43,4 +43,4 @@ var port = process.env.PORT || 8080;
     next();
   });*/
 
-//app.use('/api', api);
+app.use('/api', api);
