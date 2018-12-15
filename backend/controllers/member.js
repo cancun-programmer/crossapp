@@ -1,16 +1,17 @@
 'use strict';
-const Usuario = require('../models/usuario');
+const Member = require('../models/member');
 
 //Metodo que trae todos los oficios
-/*function getOficios(req, res) {
-    Usuario.getUsuarios((err, oficios) => {
+function getMembers(req, res) {
+    Member.getMembers((err, members) => {
+        console.log(err);
         if (err) {
             res.status(500).send({ message: 'Error al obtener los Oficios' });
         } else {
-            res.status(200).send({ oficios });
+            res.status(200).send({ members });
         }
     });
-}*/
+}
 
 //Metodo que busca un usuario por Email
 /*function getEmail(req, res) {
@@ -49,34 +50,33 @@ const Usuario = require('../models/usuario');
 }*/
 
 //Metodo que guarda un oficio
-function saveUsuario(req, res) {
+function saveMember(req, res) {
     let params = req.body;
-    let usuario = new Usuario({
-        nombre: params.nombre,
-        apellido:String,
-        fechaNacimiento: String,
-        sexo: String,
-        nota: String,
-        email: String,
-        telefonoCelular: Number,
-        telefonoCasa: Number,
-        direccion: String,
-        statusMembresia: boolean,
-        foto: String,
-        contactoEmergencia: String,
-        parentesco: String,
-        contactoEmail: String,
-        contactoTelefonoCelular: Number,
-        contactoTelefonoCasa: Number,
-        informacionMedica: String,
-        municipio: String,
-        edad: Number
+    let member = new Member({
+        name: params.name,
+        lastaname: params.lastname,
+        birthdate: params.birthdate,
+        sex: params.sex,
+        comments: params.comments,
+        email: params.email,
+        cellphone: params.cellphone,
+        homephone: params.homephone,
+        address: params.address,
+        status: params.status,
+        picture: params.picture,
+        emergencyContact: params.emergencyContact,
+        relationship: params.relationship,
+        contactEmail: params.contactEmail,
+        contactCellPhone: params.contactCellPhone,
+        contactHomePhone: params.contactHomePhone,
+        medicalInformation: params.medicalInformation,
+        age: params.age
     });
-    Usuario.saveUsuario(usuario, (err, newUsuarioSaved) => {
+    Member.saveMember(member, (err, newMemberSaved) => {
         if (err) {
             res.status(500).send({ message: 'Error al guardar el Usuario' });
         } else {
-            res.status(200).send({ message: 'Usuario guardado correctamante', newUsuarioSaved });
+            res.status(200).send({ message: 'Usuario guardado correctamante', newMemberSaved });
         }
     });
 }
@@ -109,8 +109,9 @@ function saveUsuario(req, res) {
 //Permite llamar a los metodos dentro del controlador
 module.exports = {
     //getOficios,
-   // getEmail,
-    saveUsuario
+    // getEmail,
+    saveMember,
+    getMembers
     //updateOficio,
     //deleteOficio
 }

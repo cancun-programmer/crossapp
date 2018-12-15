@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 //var oficioController = require('../controllers/oficio');
-var usuarioController = require('../controllers/usuario');
+var memberController = require('../controllers/member');
 
 // Rutas oficios
 /*router.get('/oficios', oficioController.getOficios);
@@ -12,9 +12,9 @@ router.post('/oficio', oficioController.saveOficio);
 router.put('/oficio/:id', oficioController.updateOficio);
 router.delete('/oficio/:id', oficioController.deleteOficio);*/
 
-// Rutas usuarios
-//router.get('/usuario/:email', usuarioController.getEmail);
-router.post('/usuario', usuarioController.saveUsuario);
+// Rutas Members
+router.get('/members', memberController.getMembers);
+router.post('/member', memberController.saveMember);
 //router.put('/usuario/:id', oficioController.updateUsuario);
 
 // Index Route
