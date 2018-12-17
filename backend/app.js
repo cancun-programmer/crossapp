@@ -14,7 +14,7 @@ mongoose.connect(config.database, { useNewUrlParser: true }).then(
     () => {
         console.log('Conectado a la base de datos ' + config.database)
         app.listen(port, () => {
-            console.log("Servidor escuchando en puerto " + port);
+            console.log("Servidor escuchando en http://localhost:" + port);
         });
     },
     err => { console.log('Error de conexion ' + err) }
