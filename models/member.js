@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const memberSchema = new mongoose.Schema({
     name: String,
-    lastaname: String,
+    lastname: String,
     birthdate: String,
     sex: String,
     comments: String,

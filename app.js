@@ -1,6 +1,6 @@
 'use strict';
 const express = require('express');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 //const cors = require('cors');
 const mongoose = require('mongoose');
 //const path = require('path');
@@ -33,8 +33,8 @@ var port = process.env.PORT || 8080;
 //app.use(express.static(path.join(__dirname, 'public')))
 
 // Body Parser Middleware permite la renderización de las vistas
-//app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Headers necesarios para que el servidor node de accso a las peticiones no importando que cabeceras
 /*app.use(function(req, res, next) {

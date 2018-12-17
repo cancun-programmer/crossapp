@@ -4,7 +4,6 @@ const Member = require('../models/member');
 //Metodo que trae todos los oficios
 function getMembers(req, res) {
     Member.getMembers((err, members) => {
-        console.log(err);
         if (err) {
             res.status(500).send({ message: 'Error al obtener los Oficios' });
         } else {
@@ -54,7 +53,7 @@ function saveMember(req, res) {
     let params = req.body;
     let member = new Member({
         name: params.name,
-        lastaname: params.lastname,
+        lastname: params.lastname,
         birthdate: params.birthdate,
         sex: params.sex,
         comments: params.comments,
@@ -74,7 +73,7 @@ function saveMember(req, res) {
     });
     Member.saveMember(member, (err, newMemberSaved) => {
         if (err) {
-            res.status(500).send({ message: 'Error al guardar el Usuario' });
+            res.status(500).send({ message: 'Error al guardar el Usuario', err });
         } else {
             res.status(200).send({ message: 'Usuario guardado correctamante', newMemberSaved });
         }
