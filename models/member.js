@@ -28,14 +28,12 @@ const Member = module.exports = mongoose.model('Member', memberSchema);
 module.exports.getMembers = function(callback){
     Member.find({status: true}).sort({'_id':-1}).exec(callback);
 }
-
 module.exports.saveMember = function (newMember, callback){
     newMember.save(callback);
 }
 module.exports.getEmail = function(email, callback){
     Member.find({email: email},{email:1}).lean().exec(callback);
 }
-
 module.exports.updateMember = function (id, update, callback){
-    Member.findByIdAndUpdate(id, update, callback);
+    Member.findOneAndUpdate({'_id': id}, update,{new: true}, callback);
 }

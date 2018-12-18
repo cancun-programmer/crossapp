@@ -15,6 +15,7 @@ router.delete('/oficio/:id', oficioController.deleteOficio);*/
 // Rutas Members
 router.get('/members', memberController.getMembers);
 router.post('/member', memberController.saveMember);
+router.put('/member/:id', memberController.updateMember);
 //router.put('/usuario/:id', oficioController.updateUsuario);
 
 // Index Route

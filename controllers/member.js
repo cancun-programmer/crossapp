@@ -1,7 +1,7 @@
 'use strict';
 const Member = require('../models/member');
 
-//Metodo que trae todos los oficios
+//Metodo que trae todos los Members activos
 function getMembers(req, res) {
     Member.getMembers((err, members) => {
         if (err) {
@@ -48,7 +48,7 @@ function getMembers(req, res) {
     return promise;
 }*/
 
-//Metodo que guarda un oficio
+//Metodo que guarda un nuevo Member
 function saveMember(req, res) {
     let params = req.body;
     let member = new Member({
@@ -80,18 +80,19 @@ function saveMember(req, res) {
     });
 }
 
-//Metodo que actualiza un oficio por ID
-/*function updateOficio(req, res) {
-    let oficioID = req.params.id;
+//Metodo que actualiza un Member por ID
+function updateMember(req, res) {
+    let memberID = req.params.id;
     let update = req.body;
-    Oficio.updateOficio(oficioID, update, (err, oficioUpdated) => {
+    Member.updateMember(memberID, update, (err, memberUpdated) => {
+        console.log(memberUpdated);
         if (err) {
-            res.status(500).send({ message: 'Error al actualizar el oficio', err });
+            res.status(500).send({ message: 'Error al actualizar los datos del Member', err });
         } else {
-            res.status(200).send({ oficioUpdated });
+            res.status(200).send({ memberUpdated });
         }
     });
-}*/
+}
 
 //Metodo que actualiza un oficio por ID
 /*function deleteOficio(req, res) {
@@ -110,7 +111,7 @@ module.exports = {
     //getOficios,
     // getEmail,
     saveMember,
-    getMembers
-    //updateOficio,
+    getMembers,
+    updateMember
     //deleteOficio
 }
