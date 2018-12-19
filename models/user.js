@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -12,15 +13,24 @@ const userSchema = new mongoose.Schema({
 
 const User = module.exports = mongoose.model('User', userSchema);
 
-module.exports.getUsers = function(callback){
-    Member.find({status: true}).sort({'_id':-1}).exec(callback);
+module.exports.getUsers = function (callback) {
+    User.find({}).sort({ '_id': -1 }).exec(callback);
 }
-/*module.exports.saveMember = function (newMember, callback){
-    newMember.save(callback);
+module.exports.getUser = function (id, callback) {
+    User.findOne({ '_id': id }).exec(callback);
 }
-module.exports.getEmail = function(email, callback){
-    Member.find({email: email},{email:1}).lean().exec(callback);
+module.exports.saveUser = function (newUser, callback) {
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            // Store hash in your password DB.
+            newUser.password = hash;
+            newUser.save(callback);
+        });
+    });
 }
-module.exports.updateMember = function (id, update, callback){
-    Member.findOneAndUpdate({'_id': id}, update,{new: true}, callback);
-}*/
+module.exports.comparePassword = function (password, hash, callback) {
+    bcrypt.compare(password, hash, function (err, isMatch) {
+        if(err) throw err;
+        callback(null, isMatch);
+    });
+}

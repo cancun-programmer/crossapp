@@ -1,13 +1,13 @@
 'use strict';
-const Member = require('../models/member');
+const User = require('../models/user');
 
 //Metodo que trae todos los Members activos
-function getMembers(req, res) {
-    Member.getMembers((err, members) => {
+function getUsers(req, res) {
+    User.getUsers((err, users) => {
         if (err) {
-            res.status(500).send({ message: 'Error al obtener los Members' });
+            res.status(500).send({ message: 'Error al obtener los usuarios' });
         } else {
-            res.status(200).send({ members });
+            res.status(200).send({ users });
         }
     });
 }
@@ -49,39 +49,26 @@ function getMembers(req, res) {
 }*/
 
 //Metodo que guarda un nuevo Member
-function saveMember(req, res) {
+function saveUser(req, res) {
     let params = req.body;
-    let member = new Member({
+    let user = new User({
         name: params.name,
-        lastname: params.lastname,
-        birthdate: params.birthdate,
-        sex: params.sex,
-        comments: params.comments,
-        email: params.email,
-        cellphone: params.cellphone,
-        homephone: params.homephone,
-        address: params.address,
-        status: params.status,
-        picture: params.picture,
-        emergencyContact: params.emergencyContact,
-        relationship: params.relationship,
-        contactEmail: params.contactEmail,
-        contactCellPhone: params.contactCellPhone,
-        contactHomePhone: params.contactHomePhone,
-        medicalInformation: params.medicalInformation,
-        age: params.age
+        role: params.role,
+        username: params.username,
+        password: params.password,
+        status: params.status
     });
-    Member.saveMember(member, (err, newMemberSaved) => {
+    User.saveUser(user, (err, newUserSaved) => {
         if (err) {
             res.status(500).send({ message: 'Error al guardar el Usuario', err });
         } else {
-            res.status(200).send({ message: 'Usuario guardado correctamante', newMemberSaved });
+            res.status(200).send({ message: 'Usuario guardado correctamante', newUserSaved });
         }
     });
 }
 
 //Metodo que actualiza un Member por ID
-function updateMember(req, res) {
+/*function updateMember(req, res) {
     let memberID = req.params.id;
     let update = req.body;
     Member.updateMember(memberID, update, (err, memberUpdated) => {
@@ -92,11 +79,11 @@ function updateMember(req, res) {
             res.status(200).send({ memberUpdated });
         }
     });
-}
+}*/
 
 //Permite llamar a los metodos dentro del controlador
 module.exports = {
-    saveMember,
-    getMembers,
-    updateMember
+    saveUser,
+    getUsers
+    //updateUser
 }
