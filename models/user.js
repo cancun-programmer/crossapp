@@ -28,8 +28,11 @@ module.exports.saveUser = function (newUser, callback) {
         });
     });
 }
+module.exports.getUserByUsername = function (username, callback) {
+    User.findOne({username: username}).exec(callback);
+}
 module.exports.comparePassword = function (password, hash, callback) {
-    bcrypt.compare(password, hash, function (err, isMatch) {
+    bcrypt.compare(password, hash, (err, isMatch) => {
         if(err) throw err;
         callback(null, isMatch);
     });

@@ -48,7 +48,7 @@ function getUsers(req, res) {
     return promise;
 }*/
 
-//Metodo que guarda un nuevo Member
+//Metodo que guarda un nuevo User
 function saveUser(req, res) {
     let params = req.body;
     let user = new User({
