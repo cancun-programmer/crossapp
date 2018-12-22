@@ -37,7 +37,20 @@ function signIn(req, res) {
     });
 }
 
+function ensureToken(req, res, next) {
+    var token = req.headers["authorization"]
+    if (typeof token !== 'undefined') {
+        Jwt.verify(token, Secret.secret, (err, result) => {
+            if (err) {res.sendStatus(403)} 
+            else { next() }
+        });
+    } else {
+        res.sendStatus(403)
+    }
+}
+
 
 module.exports = {
-    signIn
+    signIn,
+    ensureToken
 }
