@@ -15,7 +15,7 @@ router.post('/user', userController.saveUser);
 router.post('/signIn', authController.signIn);
 
 // Rutas Members
-router.get('/members', auth.ensureToken, memberController.getMembers);
+router.get('/members', memberController.getMembers);
 router.post('/member', memberController.saveMember);
 router.put('/member/:id', memberController.updateMember);
 

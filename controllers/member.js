@@ -71,6 +71,15 @@ function saveMember(req, res) {
         medicalInformation: params.medicalInformation,
         age: params.age
     });
+
+    member.memberships.push({
+        boxName: String,
+        membershipType: String,
+        startDate: Date,
+        endDate: Date,
+        price: Number,
+        paymentType: String
+    })
     Member.saveMember(member, (err, newMemberSaved) => {
         if (err) {
             res.status(500).send({ message: 'Error al guardar el Usuario', err });
