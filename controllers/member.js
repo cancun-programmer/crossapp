@@ -71,15 +71,15 @@ function saveMember(req, res) {
         medicalInformation: params.medicalInformation,
         age: params.age
     });
-
     member.memberships.push({
-        boxName: String,
-        membershipType: String,
-        startDate: Date,
-        endDate: Date,
-        price: Number,
-        paymentType: String
-    })
+        gymName: params.gymName,
+        membershipType: params.membershipType,
+        startDate: params.startDate,
+        endDate: params.endDate,
+        price: params.price,
+        paymentType: params.paymentType
+    });
+
     Member.saveMember(member, (err, newMemberSaved) => {
         if (err) {
             res.status(500).send({ message: 'Error al guardar el Usuario', err });
@@ -94,7 +94,7 @@ function updateMember(req, res) {
     let memberID = req.params.id;
     let update = req.body;
     Member.updateMember(memberID, update, (err, memberUpdated) => {
-        console.log(memberUpdated);
+        //console.log(memberUpdated);
         if (err) {
             res.status(500).send({ message: 'Error al actualizar los datos del Member', err });
         } else {

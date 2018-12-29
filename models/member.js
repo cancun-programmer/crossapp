@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const membershipSchema = new mongoose.Schema({
-    boxName: String,
+    gymName: String,
     membershipType: String,
     startDate: Date,
     endDate: Date,
