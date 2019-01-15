@@ -5,6 +5,7 @@ const router = express.Router();
 var memberController = require('../controllers/member');
 var userController = require('../controllers/user');
 var authController = require('../controllers/auth');
+const membershipController = require('../controllers/membership');
 const auth = require('../controllers/auth')
 
 
@@ -18,6 +19,11 @@ router.post('/signIn', authController.signIn);
 router.get('/members', memberController.getMembers);
 router.post('/member', memberController.saveMember);
 router.put('/member/:id', memberController.updateMember);
+
+// Rutas Memberships
+router.get('/membershipsByMember/:id', membershipController.getMemberships);
+router.post('/membershipSave', membershipController.saveMembership);
+router.put('/membershipUpdate/:id', membershipController.updateMembership);
 
 // Index Route
 router.get('/', auth.ensureToken, (req, res) => {

@@ -71,14 +71,6 @@ function saveMember(req, res) {
         medicalInformation: params.medicalInformation,
         age: params.age
     });
-    member.memberships.push({
-        gymName: params.gymName,
-        membershipType: params.membershipType,
-        startDate: params.startDate,
-        endDate: params.endDate,
-        price: params.price,
-        paymentType: params.paymentType
-    });
 
     Member.saveMember(member, (err, newMemberSaved) => {
         if (err) {

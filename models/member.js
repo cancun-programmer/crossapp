@@ -2,15 +2,6 @@
 
 const mongoose = require('mongoose');
 
-const membershipSchema = new mongoose.Schema({
-    gymName: String,
-    membershipType: String,
-    startDate: Date,
-    endDate: Date,
-    price: Number,
-    paymentType: String
-});
-
 const memberSchema = new mongoose.Schema({
     name: String,
     lastname: String,
@@ -29,8 +20,7 @@ const memberSchema = new mongoose.Schema({
     contactCellPhone: Number,
     contactHomePhone: Number,
     medicalInformation: String,
-    age: Number,
-    memberships: [membershipSchema]
+    age: Number
 });
 
 const Member = module.exports = mongoose.model('Member', memberSchema);
