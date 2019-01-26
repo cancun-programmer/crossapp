@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config/db');
 var api = require('./routes/routes');
+//const notifications = require('./core/notifications');
 
 const app = express();
 
@@ -41,4 +42,5 @@ app.use((req, res, next) => {
     next();
   });
 
+//app.use(notifications.generateMessage);
 app.use('/api', api);

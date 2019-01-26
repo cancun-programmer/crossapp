@@ -8,7 +8,6 @@ var authController = require('../controllers/auth');
 const membershipController = require('../controllers/membership');
 const auth = require('../controllers/auth')
 
-
 // Rutas Users
 router.get('/users', userController.getUsers);
 router.post('/user', userController.saveUser);
@@ -29,5 +28,7 @@ router.put('/membershipUpdate/:id', membershipController.updateMembership);
 router.get('/', auth.ensureToken, (req, res) => {
     res.send('Endpoint invalido');
 });
+
+
 
 module.exports = router;
