@@ -37,10 +37,21 @@ app.use(bodyParser.json());
 
 //Headers necesarios para que el servidor node de accso a las peticiones no importando que cabeceras
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
     next();
   });
 
+  setInterval(generateMessage, 10000);
+
+  function generateMessage(req, res, next) {
+    // var timeInMss = Date.now()
+    var datetime = new Date();
+    console.log(datetime);
+    //console.log(datetime.toISOString().slice(0,10));
+    //next();
+}
 //app.use(notifications.generateMessage);
 app.use('/api', api);
+
