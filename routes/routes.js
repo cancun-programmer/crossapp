@@ -9,15 +9,15 @@ const membershipController = require('../controllers/membership');
 const auth = require('../controllers/auth')
 
 // Rutas Users
-router.get('/users', userController.getUsers);
-router.post('/user', userController.saveUser);
+router.get('/getUsers', userController.getUsers);
+router.post('/saveUser', userController.saveUser);
 
 router.post('/signIn', authController.signIn);
 
 // Rutas Members
-router.get('/members', memberController.getMembers);
-router.post('/member', memberController.saveMember);
-router.put('/member/:id', memberController.updateMember);
+router.get('/getMembers', memberController.getMembers);
+router.post('/saveMember', memberController.saveMember);
+router.put('/memberUpdate/:id', memberController.updateMember);
 
 // Rutas Memberships
 router.get('/membershipsByMember/:id', membershipController.getMemberships);

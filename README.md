@@ -7,14 +7,14 @@ Backend para sistema manejador de membresias
 Endpoints
 ```
 Users
-Get -  api/users - Devuelve todos los usuarios con acceso al sistema
-Post - api/user  - Guarda un usuario
+Get -  api/getUsers - Devuelve todos los usuarios con acceso al sistema
+Post - api/saveUser  - Guarda un usuario
 Post - api/signIn - Login del sistema validado por usuario y contraseña
 
 Members
-Get - api/members - Devuelve todos los Members dados de alta
-Post - api/member - Alta de nuevo Member
-Put - api/members/:id - Actualiza un Member ya existente
+Get - api/getMembers - Devuelve todos los Members dados de alta
+Post - api/saveMember - Alta de nuevo Member
+Put - api/memberUpdate/:id - Actualiza un Member ya existente
 
 Memberships
 Get - api/membershipsByMember/:id - Devuelve todos las Membresías de un miembro

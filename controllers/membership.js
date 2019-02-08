@@ -5,7 +5,7 @@ const Membership = require('../models/membership');
 function getMemberships(req, res) {
     let memberID = req.params.id;
     console.log(memberID);
-    Membership.getMemberships(memberID, (err, memberships) => {
+    Membership.getMembershipsByID(memberID, (err, memberships) => {
         if (err) {
             res.status(500).send({ message: 'Error al obtener las membresìas' });
         } else {

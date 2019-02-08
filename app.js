@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config/db');
 var api = require('./routes/routes');
-//const notifications = require('./core/notifications');
+const notifications = require('./core/notifications');
 
 const app = express();
 
@@ -43,15 +43,9 @@ app.use((req, res, next) => {
     next();
   });
 
-  setInterval(generateMessage, 10000);
+//setInterval(notifications.generateNotification, 10000);
+notifications.generateNotification();
 
-  function generateMessage(req, res, next) {
-    // var timeInMss = Date.now()
-    var datetime = new Date();
-    console.log(datetime);
-    //console.log(datetime.toISOString().slice(0,10));
-    //next();
-}
-//app.use(notifications.generateMessage);
+
 app.use('/api', api);
 

@@ -3,10 +3,11 @@
 const mongoose = require('mongoose');
 
 const notificationSchema = new mongoose.Schema({
-    status: Boolean,
+    readStatus: Boolean,
     member: String,
     message: String,
-    type: String
+    notificationType: String,
+    notificationDate: Date
 });
 
 const Notification = module.exports = mongoose.model('Notification', notificationSchema);
