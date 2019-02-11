@@ -3,19 +3,20 @@
 const Membership = require('../models/membership');
 const Notification = require('../models/notification');
 
-//Metodo que trae todos los Members activos
+//Metodo que ejecuta los metodos de notificaciones
 function generateNotification(req, res) {
-    expiredMembership();
+    expiredMembershipNotification();
+    experitationAlertNotification();
 }
 
 
 /**
  4 tipos de notificaciones.
- Vencimiento proximo
- Vencido
+ Vencimiento proximo - alert
+ Vencido - expired
  */
 
-function expiredMembership() {
+function expiredMembershipNotification() {
     var datetime = new Date();
     Membership.getMemberships((err, memberships) => {
         //console.log(element.endDate);
@@ -24,18 +25,25 @@ function expiredMembership() {
                 console.log(element.endDate);
                 let notification = new Notification({
                     readStatus: 0,
-                    member: String,
-                    message: String,
+                    member: element.memberID,
+                    message: 'La membresía de ' + element.memberName + ' está vencida',
                     notificationType: 'expired',
                     notificationDate: datetime
                 });
-                Notification.createNotification(notification, (err, newNotification) => {
-
+                Notification.createNotification(notification, (err) => {
+                    if (err) {
+                        res.status(500).send({ message: 'Error al guardar la notificación', err });
+                    } else {
+                        res.status(200).send({ message: 'Notificación creada con exito' });
+                    }
                 });
             }
         });
     });
-    //console.log(datetime);
+}
+
+function experitationAlertNotification() {
+
 }
 
 //Permite llamar a los metodos dentro del controlador

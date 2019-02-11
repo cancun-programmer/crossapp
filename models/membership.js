@@ -9,8 +9,8 @@ const membershipSchema = new mongoose.Schema({
     endDate: Date,
     price : Number,
     paymentType : String,
-    memberID: mongoose.Types.ObjectId
-
+    memberID: mongoose.Types.ObjectId,
+    memberName: String
 });
 
 const Membership = module.exports = mongoose.model('Membership', membershipSchema);
