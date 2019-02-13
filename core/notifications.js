@@ -33,18 +33,19 @@ function expiredMembershipNotification(todayDate) {
                         console.log('Error al guardar la notificación ' + err);
                     } else {
                         console.log('Notificación creada con exito ' + notification.message);
+                        var update = { membershipStatus: false }
+                        Membership.updateMembership(element._id, update, (err, membershipUpdate) => {
+                            if (err) {
+                                console.log('Error al actualizar los datos de la membresia', err);
+                            } else {
+                                console.log('La membresia ' + membershipUpdate.membershipType + '  fue actualizada');
+                            }
+                        });
                     }
                 });
-                var update = { membershipStatus: false }
-                Membership.updateMembership(element._id, update, (err, membershipUpdate) => {
-                    if (err) {
-                        console.log('Error al actualizar los datos de la membresia', err);
-                    } else {
-                        console.log('La membresia ' + membershipUpdate.membershipType + '  fue actualizada');
-                    }
-                });
+
             } else {
-                
+
             }
         });
     });
