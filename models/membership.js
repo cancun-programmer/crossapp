@@ -10,7 +10,8 @@ const membershipSchema = new mongoose.Schema({
     price : Number,
     paymentType : String,
     memberID: mongoose.Types.ObjectId,
-    memberName: String
+    memberName: String,
+    membershipStatus: Boolean
 });
 
 const Membership = module.exports = mongoose.model('Membership', membershipSchema);

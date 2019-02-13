@@ -5,8 +5,9 @@ const Notification = require('../models/notification');
 
 //Metodo que ejecuta los metodos de notificaciones
 function generateNotification(req, res) {
-    expiredMembershipNotification();
-    experitationAlertNotification();
+    var todayDate = new Date();
+    //var 
+    expiredMembershipNotification(todayDate);
 }
 
 
@@ -16,35 +17,42 @@ function generateNotification(req, res) {
  Vencido - expired
  */
 
-function expiredMembershipNotification() {
-    var datetime = new Date();
+function expiredMembershipNotification(todayDate) {
     Membership.getMemberships((err, memberships) => {
-        //console.log(element.endDate);
         memberships.forEach(element => {
-            if (element.endDate < datetime) {
-                console.log(element.endDate);
+            if ((element.endDate < todayDate) && (element.membershipStatus == true)) {
                 let notification = new Notification({
                     readStatus: 0,
-                    member: element.memberID,
+                    memberID: element.memberID,
                     message: 'La membresía de ' + element.memberName + ' está vencida',
                     notificationType: 'expired',
-                    notificationDate: datetime
+                    notificationDate: todayDate
                 });
                 Notification.createNotification(notification, (err) => {
                     if (err) {
-                        res.status(500).send({ message: 'Error al guardar la notificación', err });
+                        console.log('Error al guardar la notificación ' + err);
                     } else {
-                        res.status(200).send({ message: 'Notificación creada con exito' });
+                        console.log('Notificación creada con exito ' + notification.message);
                     }
                 });
+                var update = { membershipStatus: false }
+                Membership.updateMembership(element._id, update, (err, membershipUpdate) => {
+                    if (err) {
+                        console.log('Error al actualizar los datos de la membresia', err);
+                    } else {
+                        console.log('La membresia ' + membershipUpdate.membershipType + '  fue actualizada');
+                    }
+                });
+            } else {
+                
             }
         });
     });
 }
 
-function experitationAlertNotification() {
+//function experitationAlertNotification() {
 
-}
+//}
 
 //Permite llamar a los metodos dentro del controlador
 module.exports = {

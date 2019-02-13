@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const notificationSchema = new mongoose.Schema({
     readStatus: Boolean,
-    member: String,
+    memberID: String,
     message: String,
     notificationType: String,
     notificationDate: Date
