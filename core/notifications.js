@@ -6,8 +6,8 @@ const Notification = require('../models/notification');
 //Metodo que ejecuta los metodos de notificaciones
 function generateNotification(req, res) {
     var todayDate = new Date();
-    //var 
     expiredMembershipNotification(todayDate);
+    experitationAlertNotification(todayDate);
 }
 
 
@@ -18,7 +18,16 @@ function generateNotification(req, res) {
  */
 
 function expiredMembershipNotification(todayDate) {
-    Membership.getMemberships((err, memberships) => {
+    var promise = new Promise((resolve, reject) => {
+        Membership.getMemberships((err, memberships) => {
+            if (err) {
+                //Si hay error no hacer nada
+                reject();
+            } else {
+                resolve(memberships);
+            }
+        });
+    }).then((memberships) => {
         memberships.forEach(element => {
             if ((element.endDate < todayDate) && (element.membershipStatus == true)) {
                 let notification = new Notification({
@@ -32,9 +41,9 @@ function expiredMembershipNotification(todayDate) {
                     if (err) {
                         console.log('Error al guardar la notificación ' + err);
                     } else {
-                        console.log('Notificación creada con exito ' + notification.message);
                         var update = { membershipStatus: false }
                         Membership.updateMembership(element._id, update, (err, membershipUpdate) => {
+                            //console.log(membershipUpdate);
                             if (err) {
                                 console.log('Error al actualizar los datos de la membresia', err);
                             } else {
@@ -42,18 +51,28 @@ function expiredMembershipNotification(todayDate) {
                             }
                         });
                     }
-                });
-
+                });   
             } else {
 
             }
         });
-    });
+    }).catch((err) => {
+            console.error('ERROR: ' + err);
+        });
 }
 
-//function experitationAlertNotification() {
 
-//}
+
+function experitationAlertNotification(todayDate) {
+    var alertDate = new Date();
+    alertDate.setDate(alertDate.getDate() - 2);
+    console.log(alertDate);
+    console.log(todayDate);
+
+     if(alertDate < todayDate ){
+
+     }
+}
 
 //Permite llamar a los metodos dentro del controlador
 module.exports = {
