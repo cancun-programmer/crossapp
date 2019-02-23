@@ -9,6 +9,8 @@ Endpoints
 Users
 Get -  api/getUsers - Devuelve todos los usuarios con acceso al sistema
 Post - api/saveUser  - Guarda un usuario
+
+Login
 Post - api/signIn - Login del sistema validado por usuario y contraseña
 
 Members
@@ -20,4 +22,8 @@ Memberships
 Get - api/membershipsByMember/:id - Devuelve todos las Membresías de un miembro
 Post - api/membershipSave - Alta de nueva membresia
 Put - api/membershipUpdate/:id - Actualiza una membresía ya existente
+
+Memberships
+Get - api/getNotifications - Devuelve todas todas las notificaciones
+Put - api/notificationUpdate/:id - Actualiza una notificación
 ```

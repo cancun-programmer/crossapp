@@ -12,8 +12,8 @@ function generateNotification(req, res) {
 
 
 /**
- 4 tipos de notificaciones.
- Vencimiento proximo - alert
+ 2 tipos de notificaciones.
+ Vencimiento proximo 2 dias antes - alert
  Vencido - expired
  */
 
@@ -51,27 +51,45 @@ function expiredMembershipNotification(todayDate) {
                             }
                         });
                     }
-                });   
+                });
             } else {
 
             }
         });
     }).catch((err) => {
-            console.error('ERROR: ' + err);
-        });
+        console.error('ERROR: ' + err);
+    });
 }
 
 
 
 function experitationAlertNotification(todayDate) {
-    var alertDate = new Date();
-    alertDate.setDate(alertDate.getDate() - 2);
-    console.log(alertDate);
-    console.log(todayDate);
+    todayDate.setUTCHours(0, 0, 0, 0);
+    var promise = new Promise((resolve, reject) => {
+        Membership.getMemberships((err, memberships) => {
+            if (err) {
+                //Si hay error no hacer nada
+                reject();
+            } else {
+                resolve(memberships);
+            }
+        });
+    }).then((memberships) => {
+        memberships.forEach(element => {
+            element.endDate.setDate(element.endDate.getDate() - 2);
+            //console.log(element.endDate.getTime());
+            //console.log(todayDate.getTime());
+            if (element.endDate.getTime() == todayDate.getTime()) {
+                console.log('La membresía vencerá en 2 días');
+            } else {
+                console.log('No hay notificiacion');
+            }
+        });
 
-     if(alertDate < todayDate ){
+    }).catch((err) => {
+        console.error('ERROR: ' + err);
+    });
 
-     }
 }
 
 //Permite llamar a los metodos dentro del controlador

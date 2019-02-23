@@ -12,15 +12,15 @@ const notificationSchema = new mongoose.Schema({
 
 const Notification = module.exports = mongoose.model('Notification', notificationSchema);
 
-module.exports.getMembers = function(callback){
-    Member.find({status: true}).sort({'_id':-1}).exec(callback);
+module.exports.getNotifications = function (callback) {
+    Notification.find({}).sort({ notificationDate: -1 }).exec(callback);
 }
-module.exports.createNotification = function (newNotification, callback){
+module.exports.createNotification = function (newNotification, callback) {
     newNotification.save(callback);
 }
-module.exports.getEmail = function(email, callback){
-    Member.find({email: email},{email:1}).lean().exec(callback);
+module.exports.getEmail = function (email, callback) {
+    Notification.find({ email: email }, { email: 1 }).lean().exec(callback);
 }
-module.exports.updateMember = function (id, update, callback){
-    Member.findOneAndUpdate({'_id': id}, update,{new: true}, callback);
+module.exports.updateNotification = function (id, update, callback) {
+    Notification.findOneAndUpdate({ '_id': id }, update, { new: true }, callback);
 }
