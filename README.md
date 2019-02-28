@@ -19,11 +19,15 @@ Post - api/saveMember - Alta de nuevo Member
 Put - api/memberUpdate/:id - Actualiza un Member ya existente
 
 Memberships
-Get - api/membershipsByMember/:id - Devuelve todos las Membresías de un miembro
-Post - api/membershipSave - Alta de nueva membresia
-Put - api/membershipUpdate/:id - Actualiza una membresía ya existente
+Get - api/getMembershipsByMember/:id - Devuelve todos las Membresías de un miembro
+Post - api/saveMembership - Alta de nueva membresia
+Put - api/updateMembership/:id - Actualiza una membresía ya existente
 
-Memberships
+Notifications
 Get - api/getNotifications - Devuelve todas todas las notificaciones
-Put - api/notificationUpdate/:id - Actualiza una notificación
+
+Payments
+Get - api//getPaymentsByMembership/:id - Devuelve todos los pagos de una membresia
+Post - api/savePayment - Agrega un nuevo pago
+Put - api/updatePayment/:id - Actualiza un pago
 ```
